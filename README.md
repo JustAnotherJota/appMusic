@@ -6,9 +6,6 @@ Falando primeiramente do SGBD, antes de começar o projeto achei que seria neces
 
 Outro conceito qual busquei compreender foi o da anotação ActionName, pois me vi diante de uma necessidade, qual seria ter um método que buscasse quais músicas estariam presentes em determinada playlist. Foi necessário o uso da anotação, pois já existiam métodos do verbo Get que utilizavam o mesmo parâmetro que viria a ser usado no método para receber as músicas de determinada playlist, junto a isso, também foi possível criar um Model apenas para retornar os dados dessa requisição, já que seriam retornados dados de duas tabelas do banco de dados.
 
-- O projeto ainda esta em desenvolvimento, o conteúdo sobre Música em Controllers, Models e Repositories já estão finalizados.
-- Há um método Put no ambiente de música, porém, acredito que não há a necessidade da existência de um no contexto atual.
-
 Algumas pastas importantes do projeto:
 
 ## [Configurations](https://github.com/jotabtw/appMusic/tree/main/playlist-api/Configurations)
