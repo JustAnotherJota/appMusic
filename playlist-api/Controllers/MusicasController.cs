@@ -4,40 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace playlist_api.Controllers
 {
     public class MusicasController : ApiController
     {
-
-        Repositories.Musica _Repositorio_musica;
+        Repositories.Musica _repositorioMusica;
         public MusicasController()
         {
-            _Repositorio_musica = new Repositories.Musica(Databases.getConnectionStringAppMusic());
+            _repositorioMusica = new Repositories.Musica(Databases.getConnectionStringAppMusic());
         }
 
         [HttpGet]
         [ActionName("musica")]
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
             try 
             { 
-                return Ok(_Repositorio_musica.getMusica());
+                return Ok(await _repositorioMusica.GetAll());
             } 
             catch (Exception ex) 
             {
                 return InternalServerError(ex);
             }
-
         }
 
         [HttpGet]
         [ActionName("musica")]
-        public IHttpActionResult Get(int id)
+        public async Task<IHttpActionResult> Get(int id)
         {
             try { 
-            Models.Musica musica = _Repositorio_musica.getMusica(id);
+            Models.Musica musica = await _repositorioMusica.GetById(id);
             if (musica.Id == 0)
                 return NotFound();
             
@@ -47,15 +46,14 @@ namespace playlist_api.Controllers
             {
                 return InternalServerError(ex);
             }
-
         }
 
         [HttpGet]
         [ActionName ("musicasdaplaylist")]
-        public IHttpActionResult GetMusicaDaPlaylist(int id)
+        public async Task<IHttpActionResult> GetMusicaDaPlaylist(int id)
         {
             try {
-                List<Models.MusicasEPlaylist> musicasplaylist = _Repositorio_musica.getMusicasDaPlaylist(id);
+                List<Models.MusicasEPlaylist> musicasplaylist = await _repositorioMusica.GetMusicasDaPlaylist(id);
 
                 if(musicasplaylist.Count == 0)
                     return NotFound();
@@ -70,14 +68,14 @@ namespace playlist_api.Controllers
 
         [HttpPost]
         [ActionName("musica")]
-        public IHttpActionResult Post([FromBody] Models.Musica nomemusica)
+        public async Task<IHttpActionResult> Post([FromBody] Models.Musica nomemusica)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                _Repositorio_musica.addMusica(nomemusica);
+                await _repositorioMusica.Add(nomemusica);
 
                 if (nomemusica.Id == 0)
                     return BadRequest();
@@ -118,11 +116,11 @@ namespace playlist_api.Controllers
 
         [HttpDelete]
         [ActionName("musica")]
-        public IHttpActionResult Delete(int id) 
+        public async Task<IHttpActionResult> Delete(int id) 
         {
             try
             {
-                bool deletar = _Repositorio_musica.Delete(id);
+                bool deletar = await _repositorioMusica.Delete(id);
 
                 if (!deletar)
                     return NotFound();
@@ -134,6 +132,5 @@ namespace playlist_api.Controllers
                 return InternalServerError(ex);
             }
         }
-
     }
 }
