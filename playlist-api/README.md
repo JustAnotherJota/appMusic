@@ -62,22 +62,22 @@ Aqui gostaria de apresentar as triggers que foram usadas durante o processo de b
       end
       go
 
-  - Trigger usado para ser possível deletar uma playlist que possui músicas dentro, foi passado id de playlist para nulo pois o playlist.id é uma primary key, assim, sendo possível relacionar as duas tabelas e conseguirmos exibir as músicas que estão dentro de uma única playlist, como é realizado em um dos métodos get de musica:
+- Trigger usado para ser possível deletar uma playlist que possui músicas dentro, foi passado id de playlist para nulo pois o playlist.id é uma primary key, assim, sendo possível relacionar as duas tabelas e conseguirmos exibir as músicas que estão dentro de uma única playlist, como é realizado em um dos métodos get de musica:
 
-        create trigger deletePlaylist
-        on playlist 
-        instead of delete
-        as 
-        begin 
+      create trigger deletePlaylist
+      on playlist 
+      instead of delete
+      as 
+      begin 
 
-          declare @id int
+        declare @id int
     
-      	  select @id = id from deleted
+        select @id = id from deleted
 
-          update musica set idPlaylist = null where idPlaylist = @id
+        update musica set idPlaylist = null where idPlaylist = @id
 
-          delete from playlist where id = @id
+        delete from playlist where id = @id
 
-        end
-        go
+      end
+      go
 
