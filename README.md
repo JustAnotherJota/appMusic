@@ -19,3 +19,6 @@ Os modelos serão responsáveiis por criar o modelo da classe e quais propriedad
 
 ## [Repositories](https://github.com/jotabtw/appMusic/tree/main/playlist-api/Repositories)
 O repositório será onde encapsularemos os métodos em que o controlador vai realizar, assim, isolando o acesso aos dados 
+
+## [Triggers](https://github.com/jotabtw/appMusic/blob/main/playlist-api/README.md)
+Os Triggers realizados durante o desenvolvimento do CRUD, fiquei feliz em conseguir compreender e aplicar esse novo conceito 
