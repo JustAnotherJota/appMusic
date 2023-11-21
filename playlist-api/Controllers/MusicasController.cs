@@ -89,30 +89,30 @@ namespace playlist_api.Controllers
             }
         }
 
-        //[HttpPut]
-        //[ActionName("musica")]
-        //public IHttpActionResult Put(int id,[FromBody] Models.Musica musica) 
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid)
-        //            return BadRequest(ModelState);
+        [HttpPut]
+        [ActionName("musica")]
+        public IHttpActionResult Put(int id, [FromBody] Models.Musica musica)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-        //        if (id != musica.Id)
-        //            return BadRequest("Objeto não relacionado com a URL invocada. Ids diferentes.");
-               
-        //        bool update = _Repositorio_musica.UpdateMusica(musica);
+                if (id != musica.Id)
+                    return BadRequest("Objeto não relacionado com a URL invocada. Ids diferentes.");
 
-        //        if (!update)
-        //            return NotFound();
+                bool update = _repositorioMusica.UpdateMusica(musica);
 
-        //        return Ok(musica);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return InternalServerError(ex);
-        //    }
-        //}
+                if (!update)
+                    return NotFound();
+
+                return Ok(musica);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
 
         [HttpDelete]
         [ActionName("musica")]
