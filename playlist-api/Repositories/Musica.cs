@@ -146,8 +146,8 @@ namespace playlist_api.Repositories
             }
         }
 
-        /*      public bool UpdateMusica(Models.Musica musica) ---- ATUALIZAR PLAYLIST
-               {
+        public bool UpdateMusica(Models.Musica musica)
+        {
                    int linhasafetadas;
                    using (_conn)
                    {
@@ -160,7 +160,6 @@ namespace playlist_api.Repositories
                            _cmd.Parameters.Add(new SqlParameter("@album", SqlDbType.VarChar)).Value = musica.Album;
                            _cmd.Parameters.Add(new SqlParameter("@nomebanda", SqlDbType.VarChar)).Value = musica.NomeBanda;
                            _cmd.Parameters.Add(new SqlParameter("@idPlaylist", SqlDbType.Int)).Value = musica.IdPlaylist;
-
                            _cmd.Parameters.Add(new SqlParameter("@id", SqlDbType.Int)).Value = musica.Id;
 
                            linhasafetadas = _cmd.ExecuteNonQuery();
@@ -169,7 +168,7 @@ namespace playlist_api.Repositories
                    }
 
                    return linhasafetadas > 0;
-               } */
+}
 
         public async Task<bool> Delete(int id)
         {
